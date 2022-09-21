@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # full-stack-gr5
 =======
 kadri veseli
@@ -22,3 +23,6 @@ full-stack-gr6
 >>>>>>> 25bddf366415325611f189d0fbf48fbdc9991829
 
 HASHISHTHAQIWOWW
+=======
+ora 19+
+>>>>>>> 1c8252f893c3558ad3d65eb49d9650604237a67d
