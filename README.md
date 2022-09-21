@@ -1,1 +1,2 @@
-# full-stack-gr6666
+kadri veseli
+hashim thaqi
