@@ -1,1 +1,2 @@
-# full-stack-gr5
+# Full-Stack-Gr2
+Errors are bad, mkay?
