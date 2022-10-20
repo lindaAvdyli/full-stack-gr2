@@ -26,3 +26,7 @@ let student = {
         },
     ],
 };
+// Student with name John Doe is 25 years old from Kosovo/Prizren
+
+let result = `Student with name ${student.name} ${student.lastName} is ${student.age} yearls old from ${student.country.name}/${student.country.city.name}`
+console.log(result)

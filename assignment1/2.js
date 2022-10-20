@@ -8,4 +8,12 @@ let arr_1 = [4, 6, 7];
 let arr_2 = [8, 1, 9];
 
 
+let sumTotal = []
+
+for (let i=0; i<arr_1.length;i++){
+
+    sumTotal[i]=arr_1[i]+arr_2[i];
+
+}console.log(sumTotal);
+
 //result [12,7,16]
