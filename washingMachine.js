@@ -3,9 +3,7 @@ const inventory = {
     water:false
 }
 
-function randomDelay(){
-    return Math.floor(Math.random() * 3000)
-}   
+
 
 function randomAct(){
     let act = false
@@ -67,5 +65,5 @@ function reStock(param){
     start()
 }
 
-start()
+// start()
 
