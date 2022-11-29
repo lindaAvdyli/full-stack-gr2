@@ -1,42 +1,47 @@
-// let array = [{name:'test',lastName:'test2'}, 6, 23, 85, 5, 6, 7] 
+const express = require('express')
+const app = express();
+const db = require('./database/database')
 
-let nxenesit = ["Sejjid", "Adem", "Dreni","Muniba", "Amin"]
+app.use(express.json());
 
- for(let i of nxenesit){
-    console.log(i[0])
- }
+app.get('/', function (req, res) {
+    res.send('Hello World! 1')
+})
 
-let array = [
-    {pesha:'1kg',emri:'domate'}, // 0
-    {pesha:'1kg',emri:'kastravec'}, // 1
-    {pesha:'2kg',emri:'djath'}, // 2
-];
+app.get('/id', function (req, res) {
+    res.send('Hello World! 2')
+})
 
-// let element = 0
+function name(id,name) {
+        console.log(id)
+}
 
-// for (let index = 0; index < array.length; index++) {
-//     element = array[index] + element
-//     console.log(test)
-// }
+name(2)
 
-// console.log(element);
+        //joe / 2  /test / 5
+app.get('/id/:name/test/:num',  (req, res) => {
+    res.send('Hello World!' + req.params.id + req.params.name + req.params.num)
+})
 
-// for(let a of array){
-//     let emri = a.emri
-//     let pesha = a.pesha
-//     console.log('Duhet me ble '+ emri + ' me sasi ' + pesha)
-// };
+app.get('/test', (req,res)=>{
+    res.send('test')
+})
 
-// for(let a in array){
-//     let emri = array[0].emri
-//     let pesha = array[0].pesha
-//     console.log('Duhet me ble '+ emri + ' me sasi ' + pesha)
-// };
+app.post('/register', (req,res)=>{
+    console.log(req.body)
+    res.send(`${req.body.name} ${req.body.lastName}`)
+})
 
-// for(let a in array){
-//     console.log(array[a])
-// }
+app.post('/', function (req, res) {
+    console.log(req.body)
+    res.send(`Hello world ${req.body}`)
+})
 
+app.get('/users', function (req, res) {
+    db.query("SELECT * FROM students", function (err, result) {
+        if (err) throw err;
+        res.json(result);
+      });
+})
 
-
-
+app.listen(3000)
