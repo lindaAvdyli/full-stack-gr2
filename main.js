@@ -11,7 +11,7 @@ app.get('/user/:id/:name/test', (req, res) => {
 })
 
 app.get('/', (req,res)=>{
-    res.send('Post method')
+    res.send('Get method')
 })
 
 app.post('/', (req,res)=>{
@@ -27,14 +27,26 @@ app.delete('/', (req,res)=>{
 })
 
 app.get('/users',(req,res)=>{
-    db.query('SELECT * FROM students', (err,result)=>{
+
+    added_query = '';
+    if(req.query.id){
+        added_query= ' WHERE id = '+req.query.id;
+    }
+    if(req.query.firstName){
+        added_query= ' WHERE firstName = "'+req.query.firstName+'"';
+    }
+    if(req.query.lastName){
+        added_query= ' WHERE lastName = "'+req.query.lastName+'"';
+    }
+    db.query('SELECT * FROM students'+ added_query, (err,result)=>{
         if(err){ throw err}
         res.json(result)
     })
 })
 
-app.get('/users/limit',(req,res)=>{
-    db.query('SELECT * FROM students LIMIT 5', (err,result)=>{
+
+app.get('/users/limit/:limit',(req,res)=>{
+    db.query('SELECT * FROM students LIMIT '+req.params.limit, (err,result)=>{
         if(err){ throw err}
         res.json(result)
     })
