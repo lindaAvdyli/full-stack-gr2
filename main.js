@@ -79,4 +79,23 @@ app.get('/users/limit/:page',(req,res)=>{
     })
 })
 
+app.delete('/users/:id',(req,res)=>{
+    db.query('DELETE FROM students WHERE id='+req.params.id, (err,result)=>{
+        if(err){ throw err}
+        res.json(result)
+    })
+})
+app.post('/users',(req,res)=>{
+
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const email = req.body.email;
+    
+    db.query('INSERT INTO students(firstName,lastName,email) VALUES ("'+firstName+'","'+lastName+'","'+email+'")'
+    , (err,result)=>{
+        if(err){ throw err}
+        res.json(result)
+    })
+})
+
 app.listen(3000)
