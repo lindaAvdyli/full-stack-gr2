@@ -85,6 +85,7 @@ app.delete('/users/:id',(req,res)=>{
         res.json(result)
     })
 })
+
 app.post('/users',(req,res)=>{
 
     const firstName = req.body.firstName;
@@ -97,5 +98,30 @@ app.post('/users',(req,res)=>{
         res.json(result)
     })
 })
+
+app.put('/users/:id',(req,res)=>{
+
+    const firstName = req.body.firstName
+    const lastName = req.body.lastName
+    const userId = req.params.id
+
+    const getUser = `Select count(id) as count FROM students where id = '${userId}'`
+    const sql = `UPDATE students SET firstName = '${firstName}', lastName = '${lastName}' WHERE (id = '${userId}')`;
+    
+    db.query(getUser,(err,result)=>{
+        if(err){ throw err}
+        if(result[0].count !== 0){
+            db.query(sql ,(err,result)=>{
+                if(err){ throw err}
+                res.json({message:`Student with id ${userId} has been updated!`})
+            })
+        }else{
+            res.json({message:`Student with id ${userId} is not found!`}, 404)
+        }
+        
+    })
+})
+
+
 
 app.listen(3000)
