@@ -1,8 +1,13 @@
 const express = require('express')
 const app = express()
 
+<<<<<<< HEAD:database/main.js
 const db = require('./database.js')
 
+=======
+const db = require('./database/database.js')
+const models = require('./models/index');
+>>>>>>> 8deeae402f61f0da54ec5caa0f7c34a96978baed:main.js
 app.use(express.json())
 
 // .      /user/Joe/ 9  /test
@@ -27,20 +32,9 @@ app.delete('/', (req,res)=>{
 })
 
 app.get('/users',(req,res)=>{
-
-    added_query = '';
-    if(req.query.id){
-        added_query= ' WHERE id = '+req.query.id;
-    }
-    if(req.query.firstName){
-        added_query= ' WHERE firstName = "'+req.query.firstName+'"';
-    }
-    if(req.query.lastName){
-        added_query= ' WHERE lastName = "'+req.query.lastName+'"';
-    }
-    db.query('SELECT * FROM students'+ added_query, (err,result)=>{
-        if(err){ throw err}
-        res.json(result)
+    const users = models.User.findAndCountAll({})
+    .then( userResponse => {
+      res.json( userResponse )
     })
 })
 
@@ -60,15 +54,13 @@ app.get('/users/limit2',(req,res)=>{
 })
 
 app.get('/users/:id',(req,res)=>{
-    db.query(`SELECT * FROM students where id = ${req.params.id}`, (err,result)=>{
-        if(err){ throw err}
-        if(result.length !== 0){
-            res.json(result) 
-        }else{
-            res.send('There is no such a user with that id.', 404)
-        } 
-        
+    const users = models.User.findOne({
+        where: {id: req.params.id},
     })
+    .then( userResponse => {
+      res.json( userResponse )
+    })
+
 })
 
 app.get('/users/limit/:page',(req,res)=>{
@@ -80,10 +72,23 @@ app.get('/users/limit/:page',(req,res)=>{
 })
 
 app.delete('/users/:id',(req,res)=>{
+<<<<<<< HEAD:database/main.js
     db.query('DELETE FROM students WHERE id='+req.params.id, (err,result)=>{
         if(err){ throw err}
         res.json(result)
     })
+=======
+    const users = models.User.destroy({
+        where: {id: req.params.id},
+    })
+    .then( userResponse => {
+      res.json( userResponse )
+    })
+    // db.query('DELETE FROM students WHERE id='+req.params.id, (err,result)=>{
+    //     if(err){ throw err}
+    //     res.json(result)
+    // })
+>>>>>>> 8deeae402f61f0da54ec5caa0f7c34a96978baed:main.js
 })
 app.post('/users',(req,res)=>{
     const firstName = req.body.firstName;
@@ -97,6 +102,7 @@ app.post('/users',(req,res)=>{
 })
 
 app.put('/users/:id',(req,res)=>{
+<<<<<<< HEAD:database/main.js
 
     const firstName = req.body.firstName
     const lastName = req.body.lastName
@@ -117,6 +123,21 @@ app.put('/users/:id',(req,res)=>{
         }
 
     })
+=======
+    const firstName = req.body.firstName
+    const lastName = req.body.lastName
+    
+    const users = models.User.update({ firstName: firstName, lastName:lastName}, {
+        where: {
+          id: req.params.id
+        }
+    })
+    .then( userResponse => {
+      res.json( 'Useri u perditesua me sukses' )
+    })
+
+    
+>>>>>>> 8deeae402f61f0da54ec5caa0f7c34a96978baed:main.js
 })
 
 app.listen(3000)
