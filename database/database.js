@@ -25,7 +25,7 @@ const connection = mysql.createConnection({
 
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('school', 'root', '', {
+const sequelize = new Sequelize('full-stack', 'root', 'pw123456', {
   host: 'localhost',
   dialect: 'mysql'
 });
