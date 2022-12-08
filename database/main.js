@@ -1,13 +1,10 @@
 const express = require('express')
 const app = express()
 
-<<<<<<< HEAD:database/main.js
 const db = require('./database.js')
 
-=======
 const db = require('./database/database.js')
 const models = require('./models/index');
->>>>>>> 8deeae402f61f0da54ec5caa0f7c34a96978baed:main.js
 app.use(express.json())
 
 // .      /user/Joe/ 9  /test
@@ -72,12 +69,10 @@ app.get('/users/limit/:page',(req,res)=>{
 })
 
 app.delete('/users/:id',(req,res)=>{
-<<<<<<< HEAD:database/main.js
     db.query('DELETE FROM students WHERE id='+req.params.id, (err,result)=>{
         if(err){ throw err}
         res.json(result)
     })
-=======
     const users = models.User.destroy({
         where: {id: req.params.id},
     })
@@ -88,7 +83,6 @@ app.delete('/users/:id',(req,res)=>{
     //     if(err){ throw err}
     //     res.json(result)
     // })
->>>>>>> 8deeae402f61f0da54ec5caa0f7c34a96978baed:main.js
 })
 app.post('/users',(req,res)=>{
     const firstName = req.body.firstName;
@@ -102,7 +96,6 @@ app.post('/users',(req,res)=>{
 })
 
 app.put('/users/:id',(req,res)=>{
-<<<<<<< HEAD:database/main.js
 
     const firstName = req.body.firstName
     const lastName = req.body.lastName
@@ -123,21 +116,6 @@ app.put('/users/:id',(req,res)=>{
         }
 
     })
-=======
-    const firstName = req.body.firstName
-    const lastName = req.body.lastName
-    
-    const users = models.User.update({ firstName: firstName, lastName:lastName}, {
-        where: {
-          id: req.params.id
-        }
-    })
-    .then( userResponse => {
-      res.json( 'Useri u perditesua me sukses' )
-    })
-
-    
->>>>>>> 8deeae402f61f0da54ec5caa0f7c34a96978baed:main.js
 })
 
 app.listen(3000)
